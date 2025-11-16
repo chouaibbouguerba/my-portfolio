@@ -479,8 +479,6 @@ def show_stats():
 
 # ===== Application Setup =====
 def create_app():
-    """Application factory pattern"""
-    # Configure logging
     logging.basicConfig(
         level=logging.INFO,
         format='%(asctime)s %(levelname)s: %(message)s',
@@ -490,25 +488,11 @@ def create_app():
         ]
     )
     
-    return app
-
-# ===== Run Application =====
-if __name__ == '__main__':
-    app = create_app()
-    
-    # Initialize database
     with app.app_context():
         db.create_all()
     
-    print("🚀 Starting Chouaib Portfolio Server...")
-    print(f"📧 Email configured: {app.config['MAIL_USERNAME']}")
-    print(f"🌐 Server running on: http://{app.config.get('FLASK_HOST', '0.0.0.0')}:{app.config.get('FLASK_PORT', 5000)}")
-    print("💡 Visit /test-email to test email functionality")
-    
-    debug_mode = os.environ.get('FLASK_DEBUG', 'True').lower() == 'true'
-    
-    app.run(
-        debug=debug_mode,
-        host=os.environ.get('FLASK_HOST', '0.0.0.0'),
-        port=int(os.environ.get('FLASK_PORT', 5000))
-    )
+    return app
+
+
+# ===== DO NOT USE app.run IN RENDER =====
+create_app()
