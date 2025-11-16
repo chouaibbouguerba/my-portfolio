@@ -8,3 +8,4 @@ WTForms==3.0.1
 python-dotenv==1.0.0
 gunicorn==21.2.0
 Werkzeug==2.3.7
+email_validator==2.3.0
